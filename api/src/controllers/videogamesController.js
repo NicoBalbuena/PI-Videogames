@@ -1,6 +1,7 @@
-const {Videogames}=require('../db');
+const {Videogames,Genres}=require('../db');
 const key=process.env.API_KEY
-const axios=require("axios")
+const axios=require("axios");
+
 
 
 const getVideogames=async()=>{
@@ -22,8 +23,30 @@ const getVideogames=async()=>{
     return results;
 }
 
-const getVideogamesDB=async()=>{
-    const gamesDB=await Videogames.findAll();
+// const getVideogamesDB=async(nombre)=>{
+//     const gamesDB=await Videogames.findAll({
+//         include:[
+//             {
+//                 model:Genres,
+//                 attributes:["genres"]
+//             }
+//         ]
+//     });
+
+//     if(!gamesDB.length)throw new Error("No hay video juegos registrados");
+//     return gamesDB
+// }
+
+const getVideogamesDB=async(nombre)=>{
+    const gamesDB=await Videogames.findAll({
+        include:
+            {
+                model:Genres,
+                attributes:["pepito"],
+            }
+        
+    });
+
     if(!gamesDB.length)throw new Error("No hay video juegos registrados");
     return gamesDB
 }

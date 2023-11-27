@@ -1,10 +1,10 @@
-const{ getAllVideogames}=require('../controllers/videogamesController')
+const{ getAllVideogames, getVideogamesDB}=require('../controllers/videogamesController')
 
 const getVideogamesHandler=async(req,res)=>{
     const {nombre}=req.query
    try {
     if(nombre){
-        const response=await getAllVideogames(nombre);
+        const response=await getVideogamesDB(nombre);
         return res.status(200).json(response);
     }
     const response=await getAllVideogames();

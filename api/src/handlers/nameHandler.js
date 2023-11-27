@@ -5,7 +5,6 @@ const { nameController } = require("../controllers/nameController");
 
 const getNameHandler=async(req,res)=>{
     const {nombre}=req.query
-    console.log("Nombre es:",nombre)
     try {
         if(nombre){
         const response=await getAllVideogames(nombre);

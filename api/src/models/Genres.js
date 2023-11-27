@@ -1,4 +1,5 @@
 const {DataTypes}=require('sequelize')
+
 module.exports=(sequilize)=>{
     sequilize.define('Genres',{
         id: {
@@ -7,9 +8,9 @@ module.exports=(sequilize)=>{
             defaultValue:DataTypes.UUIDV4
             
           },
-        nombre:{
-            type:DataTypes.STRING,
-            allowNull:false
+        pepito:{
+            type:DataTypes.ARRAY(DataTypes.STRING),
+            allowNull:true
         }
     },
     {freezeTableName:true ,timestamps:false}
