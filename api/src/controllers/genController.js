@@ -14,13 +14,13 @@ const getAllGenresDB=async()=>{
         genresApi.forEach(async(g)=>{
             await Genres.findOrCreate({
                 where:{
-                    pepito:g,
+                    nombre:g,
                 }
             })
         })
         return genresApi
     }
-    return genres.map((g)=>g.pepito);
+    return genres.map((g)=>g.nombre);
 }
 
 module.exports={

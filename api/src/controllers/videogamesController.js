@@ -42,7 +42,10 @@ const getVideogamesDB=async(nombre)=>{
         include:
             {
                 model:Genres,
-                attributes:["pepito"],
+                attributes:["nombre"],
+                through: {
+                    attributes: [],
+                },
             }
         
     });

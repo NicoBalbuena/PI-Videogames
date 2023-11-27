@@ -1,7 +1,8 @@
-const {Videogames}=require('../db');
-const Genres = require('../models/Genres');
+const {Videogames,Genres}=require('../db');
 
-const createGame=async(nombre,descripcion,plataformas,fechaDeLanzamiento,rating,imagen,genero
+
+const createGame=async(nombre,descripcion,plataformas,fechaDeLanzamiento,rating,imagen,
+    genero
     )=> {
     const newGame=await Videogames.create({
         nombre,
@@ -9,18 +10,16 @@ const createGame=async(nombre,descripcion,plataformas,fechaDeLanzamiento,rating,
         plataformas,
         fechaDeLanzamiento,
         rating,
-        imagen});
-
-    // genero.forEach( async (gen)=> {
-    //     let generosDB= await Genres.findAll({where:{pepito:gen} });
-        
-    // })
+        imagen,
+    });
     
-    //newGame
+
+    let getAllGenresDB = await Genres.findAll({where : {nombre:genero}})
+    
+    newGame.addGenres(getAllGenresDB)
+    
     return newGame
 }
-
-
 
 module.exports={
     createGame

@@ -8,8 +8,8 @@ module.exports=(sequilize)=>{
             defaultValue:DataTypes.UUIDV4
             
           },
-        pepito:{
-            type:DataTypes.ARRAY(DataTypes.STRING),
+        nombre:{
+            type:DataTypes.STRING,
             allowNull:true
         }
     },
