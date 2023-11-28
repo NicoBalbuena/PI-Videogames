@@ -37,7 +37,7 @@ const getVideogames=async()=>{
 //     return gamesDB
 // }
 
-const getVideogamesDB=async(nombre)=>{
+const getVideogamesDB=async()=>{
     const gamesDB=await Videogames.findAll({
         include:
             {
@@ -47,24 +47,26 @@ const getVideogamesDB=async(nombre)=>{
                     attributes: [],
                 },
             }
-        
     });
-
-    if(!gamesDB.length)throw new Error("No hay video juegos registrados");
+    //if(!gamesDB.length)throw new Error("No hay video juegos registrados");
     return gamesDB
 }
 
-const getAllVideogames=async(nombre)=>{
+const getAllVideogames=async(nombre,id)=>{
     const allApi=await getVideogames();
     const allDB=await getVideogamesDB();
     const allVideogames=[...allDB,...allApi]
-
 
     if(nombre){
         const filterGames=allVideogames.filter((g)=>g.nombre===nombre )
         return filterGames;
     }
+    if(id){
+        const filterGamesId=allVideogames.filter((g)=>g.id==id )
+        return filterGamesId;
+    }
     return allVideogames
+    
 }
 
 module.exports={
