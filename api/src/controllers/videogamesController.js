@@ -58,7 +58,7 @@ const getAllVideogames=async(nombre,id)=>{
     const allVideogames=[...allDB,...allApi]
 
     if(nombre){
-        const filterGames=allVideogames.filter((g)=>g.nombre===nombre )
+        const filterGames=allVideogames.filter((g)=>g.nombre.toLowerCase().includes(nombre.toLowerCase()))
         return filterGames;
     }
     if(id){
