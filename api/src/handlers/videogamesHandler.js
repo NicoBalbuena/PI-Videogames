@@ -1,6 +1,5 @@
-const { getById } = require('../controllers/idController');
-
 const{ getAllVideogames, getVideogamesDB, getVideogames}=require('../controllers/videogamesController')
+const {allVideogamesId}=require('../controllers/idController')
 
 const getVideogamesHandler=async(req,res)=>{
     const {nombre,id}=req.query
@@ -11,7 +10,9 @@ const getVideogamesHandler=async(req,res)=>{
     }
     
     if(id){
-        const response=await getById(id);
+        console.log("Entro en el handler",id)
+        const response=await allVideogamesId(id);
+        console.log(allVideogamesId)
         return res.status(200).json(response);
     }
     const response=await getAllVideogames();

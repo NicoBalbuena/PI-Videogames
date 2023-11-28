@@ -5,7 +5,7 @@ const axios=require("axios");
 
 
 const getVideogames=async()=>{
-    const response=await axios.get(`https://api.rawg.io/api/games?key=${key}`)
+    const response=await axios.get(`https://api.rawg.io/api/games?key=${key}&limit=30`)
     const data=response.data.results
     const results= data.map((games)=>{
         const platforms = games.platforms.map((p) => p.platform.name);
@@ -20,9 +20,9 @@ const getVideogames=async()=>{
         }
     })
     
+    
     return results;
 }
-
 // const getVideogamesDB=async(nombre)=>{
 //     const gamesDB=await Videogames.findAll({
 //         include:[
@@ -36,7 +36,6 @@ const getVideogames=async()=>{
 //     if(!gamesDB.length)throw new Error("No hay video juegos registrados");
 //     return gamesDB
 // }
-
 const getVideogamesDB=async()=>{
     const gamesDB=await Videogames.findAll({
         include:
@@ -61,10 +60,10 @@ const getAllVideogames=async(nombre,id)=>{
         const filterGames=allVideogames.filter((g)=>g.nombre.toLowerCase().includes(nombre.toLowerCase()))
         return filterGames;
     }
-    if(id){
-        const filterGamesId=allVideogames.filter((g)=>g.id==id )
-        return filterGamesId;
-    }
+    // if(id){
+    //     const filterGamesId=allVideogames.filter((g)=>g.id==id )
+    //     return filterGamesId;
+    // }
     return allVideogames
     
 }

@@ -14,7 +14,7 @@ const createGame=async(nombre,descripcion,plataformas,fechaDeLanzamiento,rating,
     });
     
 
-    let getAllGenresDB = await Genres.findAll({where : {nombre:genero}})
+    let getAllGenresDB = await Genres.findAll({where:{nombre:genero}})
     newGame.addGenres(getAllGenresDB)
     
     return newGame
