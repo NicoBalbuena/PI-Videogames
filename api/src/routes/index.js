@@ -16,9 +16,6 @@ router.use('/videogames/name',nameRouter)
 router.use('/videogames',videogamesRouter)
 router.use('/genres',genresRouter)
 router.use('/postgame',createRouter)
-//router.use('/videogames/:idVideogame',idRouter)
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 
 
 module.exports = router;

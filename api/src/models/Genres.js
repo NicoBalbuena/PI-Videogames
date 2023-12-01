@@ -10,7 +10,7 @@ module.exports=(sequilize)=>{
           },
         nombre:{
             type:DataTypes.STRING,
-            allowNull:true
+            allowNull:false
         }
     },
     {freezeTableName:true ,timestamps:false}

@@ -5,8 +5,8 @@ const axios=require("axios");
 
 
 const getVideogames=async()=>{
-    const response=await axios.get(`https://api.rawg.io/api/games?key=${key}&limit=30`)
-    const data=response.data.results
+    const response=await axios.get(`https://api.rawg.io/api/games?key=${key}`)
+    const data=response.data.results.slice(0,50)
     const results= data.map((games)=>{
         const platforms = games.platforms.map((p) => p.platform.name);
         return{

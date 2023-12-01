@@ -23,7 +23,6 @@ const getVideogamesId=async()=>{
     })
     return results;
 }
-
 const getVideogamesDBid=async()=>{
     const gamesDB=await Videogames.findAll({
         include:
@@ -38,7 +37,6 @@ const getVideogamesDBid=async()=>{
     //if(!gamesDB.length)throw new Error("No hay video juegos registrados");
     return gamesDB
 }
-
 const allVideogamesId=async(id)=>{
         console.log("aca recibe el id",id)
         const gamesDB=await getVideogamesDBid();

@@ -5,4 +5,4 @@ const createRouter=Router();
 
 createRouter.post('/',createGameHandler)
 
-module.exports=createRouter;
+module.exports=createRouter

@@ -18,12 +18,13 @@ const getAllGenresDB=async()=>{
                 }
             })
         })
-        //return genresApi
-    
+        return genresApi
+    }
     console.log("Generos cargados")
-    return genres.map((g)=>g.nombre);
+    //return genres.map((g)=>g.nombre);
     
-}
+//}
+
 module.exports={
     getAllGenresDB
 }
