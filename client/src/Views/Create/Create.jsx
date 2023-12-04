@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import "./create.css"
-import { getGenero, getVideogames, postGame } from '../../Action/action'
-import  {useDispatch} from "react-redux"
+import { getGenero, getVideogames, postGame } from '../../Redux/Action/action'
+import  {useDispatch, useSelector} from "react-redux"
 
 const Create = () => {
 
   const dispatch=useDispatch();
 
+  const allGenres=useSelector(state=>state.allGenres)
+
+
   useEffect(()=>{
-    dispatch(getGenero())
+   const response= dispatch(getGenero())
   },[])
 
   const [state,setState]=useState({
@@ -48,7 +51,6 @@ const Create = () => {
 
   return (
     <div className='form-cont'>
-      {console.log(state)}
       <form onSubmit={handleSubmit}>
         
         <label>Nombre:</label>
@@ -70,9 +72,7 @@ const Create = () => {
         
         <label>Genero</label>
         <select  onChange={handleChange} name="genero" id="">
-          <option>Accion</option>
-          <option>No accion</option>
-          <option>No accion2</option>
+          {allGenres.map(genero => <option value={genero}>{genero}</option>)}
         </select>
         
         <input type='submit'></input>

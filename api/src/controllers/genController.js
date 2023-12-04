@@ -20,7 +20,7 @@ const getAllGenresDB=async()=>{
         })
         return genresApi
     }
-    console.log("Generos cargados")
+    console.log("genres cargados")
     //return genres.map((g)=>g.nombre);
     
 //}

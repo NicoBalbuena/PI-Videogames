@@ -3,28 +3,27 @@ const key=process.env.API_KEY
 const {Videogames,Genres}=require('../db');
 const axios=require("axios");
 
-
-const getVideogamesId=async()=>{
-    const response=await axios.get(`https://api.rawg.io/api/games?key=${key}`)
-    const data=response.data.results
-    const results= data.map((games)=>{
+//no es necesario un mapeo porque solamente tengo un solo objeto
+const getVideogamesId=async(id)=>{
+    const response=await axios.get(`https://api.rawg.io/api/games/${id}?key=${key}`)
+    const games=response.data
         const platforms = games.platforms.map((p) => p.platform.name);
         const genresUniq=games.genres.map((g)=>g.name)
         return{
             id:games.id,
             nombre:games.name,
-            descripcion:games.description,
             plataformas:platforms,
             fechaDeLanzamiento:games.released,
             rating:games.rating,
             imagen:games.background_image,
             genero:genresUniq
         }
-    })
-    return results;
 }
-const getVideogamesDBid=async()=>{
+const getVideogamesDBid=async(id)=>{
     const gamesDB=await Videogames.findAll({
+        where:{
+            id:id
+        },
         include:
             {
                 model:Genres,
@@ -38,19 +37,15 @@ const getVideogamesDBid=async()=>{
     return gamesDB
 }
 const allVideogamesId=async(id)=>{
-        console.log("aca recibe el id",id)
-        const gamesDB=await getVideogamesDBid();
-        const gamesApi=await getVideogamesId();
-        const allGames=[...gamesDB,...gamesApi]
-
-        if(id){
-            const filterById=allGames.filter((g)=>g.id===parseInt(id))
-            return filterById;
-        }
-
-    return allVideogamesId
+        const regex = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/;
+        if (regex.test(id)) {
+            return await getVideogamesDBid(id);
+          } else {
+            return await getVideogamesId(id);
+          }
 }
 
 module.exports={
     allVideogamesId,
+    getVideogamesId
 }

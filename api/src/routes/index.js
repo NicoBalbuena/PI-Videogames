@@ -11,7 +11,7 @@ const createRouter = require('./createRouter');
 
 
 const router = Router();
-router.use('/videogames/:idVideogame',idRouter)
+router.use('/videogames/:id',idRouter)
 router.use('/videogames/name',nameRouter)
 router.use('/videogames',videogamesRouter)
 router.use('/genres',genresRouter)

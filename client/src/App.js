@@ -15,7 +15,7 @@ function App() {
         <Route path={"/"} component={Navbar}></Route>
       </Switch>
       <Switch>
-          <Route path={"/details"} component={Details}></Route>
+          <Route path={"/details/:id"} component={Details}></Route>
           <Route path={"/home"} component={Home}></Route>
           <Route path={"/create"} component={Create}></Route>
       </Switch>
