@@ -1,7 +1,10 @@
+const {Videogames,Genres}=require('../db');
 
 const createGame=async(nombre,descripcion,plataformas,fechaDeLanzamiento,rating,imagen,
     genres
+   
     )=> {
+        console.log(genres)  
     const newGame=await Videogames.create({
         nombre,
         descripcion,
@@ -12,7 +15,6 @@ const createGame=async(nombre,descripcion,plataformas,fechaDeLanzamiento,rating,
 
     });
     
-    let getAllGenresDB = await Genres.findAll({where:{nombre:genero}})
     let getAllGenresDB = await Genres.findAll({where:{nombre:genres}})
     newGame.addGenres(getAllGenresDB)
     console.log(newGame)
