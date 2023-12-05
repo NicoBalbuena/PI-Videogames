@@ -152,14 +152,22 @@ function rootReducer(state=initialState,action){
                     
                 };
         case "FILTRO_GAME":
-            let filterByGenres=[...state.gamesBackUp].filter((g)=>g.genres && g.genres.includes(action.payload));
-            
-            return {
-                ...state,
-                allVideoGames:[...filterByGenres].splice(0,itemPage),
-                filterGames:filterByGenres,
-                filters:true
-            }
+                    let filterByGenres = [...state.gamesBackUp].filter((g) => {
+                        if (g.genres) {
+                            return g.genres.includes(action.payload);
+                        } else if (g.Genres && g.Genres.length > 0) {
+                            // Asegúrate de que Genres sea un array, y luego verifica la inclusión
+                            return g.Genres.map(genre => genre.nombre).includes(action.payload);
+                        }
+                        return false; // Si no hay información de género, exclúyelo del filtro
+                    });
+                
+                    return {
+                        ...state,
+                        allVideoGames: [...filterByGenres].splice(0, itemPage),
+                        filterGames: filterByGenres,
+                        filters: true
+                    };
 
         case "FILTRO_ORIGEN":{
             const regex = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/;
