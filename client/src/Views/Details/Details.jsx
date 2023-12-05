@@ -12,7 +12,7 @@ const Details = () => {
   
   const details=useSelector(state=>state.details)
   
-
+  
   useEffect(()=>{
     dispatch(getGamesId(params.id))
     return ()=>{
@@ -20,25 +20,31 @@ const Details = () => {
     }
   },[params.id, dispatch])
   
-
+  console.log(details)
 
   return (
-    details.imagen? (
+    details.imagen ? (
       <div className='container'>
-      <div>
-        <img src={details.imagen} alt="Imagen videojuego"/>
+        <div>
+          <img src={details.imagen} alt="Imagen videojueg"/>
+        </div>
+        <div className='container-elem'>{details.id}</div>
+        <div className='container-elem'>{details.nombre}</div>
+        <div className='container-elem'>{details.plataformas}</div>
+        <div className='container-elem'>{details.descripcion}</div>
+        <div className='container-elem'>{details.fechaDeLanzamiento}</div>
+        <div className='container-elem'>{details.rating}</div>
+        <div className='container-elem'>
+          {details.genero
+            ? details.genero // Si genero existe, úsalo
+            : details.Genres.map(g => g.nombre).join('  ') // Si genero no existe, usa Genres
+          }
+        </div>
       </div>
-      <div className='container-elem'>{details.id}</div>
-      <div className='container-elem'>{details.nombre}</div>
-      <div className='container-elem'>{details.plataformas}</div>
-      <div className='container-elem'>{details.descripcion}</div>
-      <div className='container-elem'>{details.fechaDeLanzamiento}</div>
-      <div className='container-elem'>{details.rating}</div>
-      <div className='container-elem'>{details.genero}</div>
-    </div>) : (<div><h1>Cargado...</h1></div>)
-    
-    
-  )
+    ) : (
+      <div><h1>Cargado...</h1></div>
+    )
+  );
 }
 
 export default Details

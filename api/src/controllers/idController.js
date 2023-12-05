@@ -16,7 +16,8 @@ const getVideogamesId=async(id)=>{
             fechaDeLanzamiento:games.released,
             rating:games.rating,
             imagen:games.background_image,
-            genero:genresUniq
+            genero:genresUniq,
+            descripcion:games.description
         }
 }
 const getVideogamesDBid=async(id)=>{
@@ -34,6 +35,7 @@ const getVideogamesDBid=async(id)=>{
             }
     });
     //if(!gamesDB.length)throw new Error("No hay video juegos registrados");
+    console.log(gamesDB)
     return gamesDB
 }
 const allVideogamesId=async(id)=>{

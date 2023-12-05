@@ -7,3 +7,5 @@ export const PAGINACION="PAGINACION"
 export const FILTRO="FILTRO"
 export const RESET="RESET"
 export const FILTRO_GAME="FILTRO_GAME"
+export const FILTRO_ORIGEN="FILTRO_ORIGEN"
+

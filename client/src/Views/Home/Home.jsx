@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Cards from '../../Components/Cards/Cards'
-import { filterGame, filtro, getGames, getGenero, page, resetGames } from '../../Redux/Action/action'
+import { filterGame, filtro, getGames, getGenero, origenGames, page, resetGames } from '../../Redux/Action/action'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -10,7 +10,7 @@ const Home = () => {
 
   useEffect(()=>{
     dispatch(getGames())
-  })
+  },[])
   useEffect(()=>{
     const response= dispatch(getGenero())
    },[])
@@ -32,6 +32,12 @@ const Home = () => {
     dispatch(filterGame(event.target.value))
     console.log(event.target.value)
   }
+  const origenGame=(event)=>{
+    
+    dispatch(origenGames(event.target.name))
+    console.log(event.target.name)
+  }
+  
 
   return (
     <div className='home-cont'>
@@ -50,6 +56,9 @@ const Home = () => {
         <select  onChange={filterGames} name="genres" id="">
           {allGenres.map(genres => <option value={genres}>{genres}</option>)}
         </select>
+        <button name="DB" onClick={origenGame}>Videos Games Creados</button>
+
+        <button name="API" onClick={origenGame}>Videos Games</button>
       </div>
       <div>
         <label>Paginado</label>

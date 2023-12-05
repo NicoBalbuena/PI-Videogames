@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CLEAR_DETAILS, FILTRO, FILTRO_GAME, GET_DETAILS, GET_GAMES, GET_GENRES, PAGINACION, RESET, SEARCH_GAME } from "./actions-types";
+import { CLEAR_DETAILS, FILTRO, FILTRO_GAME, FILTRO_ORIGEN, GET_DETAILS, GET_GAMES, GET_GENRES, PAGINACION, RESET, SEARCH_GAME } from "./actions-types";
 
 
 export function postGame(state){
@@ -17,7 +17,7 @@ export function postGame(state){
 export function getGenero(state){
     return async function(dispatch){
         try {
-            const response=await axios.get("http://localhost:3001/genres/")
+            const response=await axios.get("http://localhost:3001/genres")
             return dispatch({
                 type:GET_GENRES,
                 payload:response.data
@@ -62,11 +62,14 @@ export function getGames(){
 
 export function getGamesId(id){
     return async function(dispatch){
+        console.log(id)
         try {
+            
             const response=await axios.get(`http://localhost:3001/videogames?id=${id}`)
             dispatch({
+                
                 type:GET_DETAILS,
-                payload:response.data
+                payload:response.data,
             })
         } catch (error) {
             console.log(error.response.data.error)
@@ -116,13 +119,14 @@ export function filtro(order){
 }
 
 export function resetGames(){
+    console.log("viene aca")
     return  function(dispatch){
         try {
             dispatch({
                 type:RESET,
             })
         } catch (error) {
-            
+            console.log(error)
         }
     }
 }
@@ -138,6 +142,20 @@ export function filterGame(genres){
             console.log("se va",dispatch)
         } catch (error) {
             console.log(error)
+        }
+    }
+}
+
+export function origenGames(order){
+    return  function(dispatch){
+        try {
+            dispatch({
+                type:FILTRO_ORIGEN,
+                payload:order
+            })
+            
+        } catch (error) {
+            
         }
     }
 }

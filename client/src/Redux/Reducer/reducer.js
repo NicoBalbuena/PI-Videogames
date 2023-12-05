@@ -10,7 +10,10 @@ let initialState={
     allGenres:[],
     details:{},
     currentPage:0,
-    gamesBackUp:[]
+    gamesBackUp:[],
+    filterGames:[],
+    filters:false ,
+    gamesOrd:[]
     
 }
 
@@ -24,7 +27,8 @@ function rootReducer(state=initialState,action){
             return {
                 ...state,
                 allVideoGames:[...action.payload].splice(0,itemPage),
-                gamesBackUp:action.payload
+                gamesBackUp:action.payload,
+                gamesOrd:action.payload
             }
         }
         case GET_GENRES:
@@ -38,13 +42,14 @@ function rootReducer(state=initialState,action){
                 allVideoGames:action.payload
             }
         }
-        case GET_DETAILS:{
-            console.log(action.payload)
+        case GET_DETAILS: {
+            const detailsPayload = Array.isArray(action.payload) ? action.payload[0] : action.payload;
+          
             return {
-                ...state,
-                details:action.payload
-            }
-        }
+              ...state,
+              details: detailsPayload,
+            };
+          }
         case CLEAR_DETAILS:{
             return {
                 ...state,
@@ -56,16 +61,25 @@ function rootReducer(state=initialState,action){
             const prev_page=state.currentPage -1
             const firstIndex= action.payload==="next"? next_page*itemPage : prev_page*itemPage
             
-            if(action.payload==="next" &&firstIndex>=state.gamesBackUp.length)return state
-            else if(action.payload==="prev" && firstIndex>=state.gamesBackUp.length)return state
-
-
-            return{
-                ...state,
-                allVideoGames:[...state.gamesBackUp].splice(firstIndex,itemPage),
-                
-                currentPage:action.payload==="next"?next_page : prev_page
+            if(state.filters){
+                if (firstIndex < 0 || firstIndex >= state.filterGames.length) {
+                    return state;
+                }
+                return {
+                    ...state,
+                    allVideoGames: [...state.filterGames].splice(firstIndex, itemPage),
+                    currentPage: action.payload === "next" ? next_page : prev_page
+                };
             }
+            if (firstIndex < 0 || firstIndex >= state.gamesBackUp.length) {
+                return state;
+            }
+        
+            return {
+                ...state,
+                allVideoGames: [...state.gamesBackUp].splice(firstIndex, itemPage),
+                currentPage: action.payload === "next" ? next_page : prev_page
+            };
         case FILTRO:
             switch (action.payload) {
                 
@@ -128,20 +142,54 @@ function rootReducer(state=initialState,action){
                     break;
             }
         case "RESET":
-            return{
-                ...state,
-                allVideoGames:[...state.gamesBackUp].splice(0,itemPage),
-                currentPage:0
-            }
+                console.log("entra en el reducer");
+                return {
+                    ...state,
+                    allVideoGames: [...state.gamesOrd].splice(0, itemPage),
+                    currentPage: 0,
+                    filters: false,
+                    filterGames: []  
+                    
+                };
         case "FILTRO_GAME":
             let filterByGenres=[...state.gamesBackUp].filter((g)=>g.genres && g.genres.includes(action.payload));
             
             return {
                 ...state,
                 allVideoGames:[...filterByGenres].splice(0,itemPage),
-                //gamesBackUp:filterByGenres
-                //filter:true
+                filterGames:filterByGenres,
+                filters:true
             }
+
+        case "FILTRO_ORIGEN":{
+            const regex = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/;
+            const gamesDB=[...state.gamesBackUp]
+            const gamesApi=[...state.gamesBackUp]
+
+            if (action.payload === "DB") {
+
+                const filteredDBGames = gamesDB.filter((game) => {
+                  return regex.test(game.id);
+                });
+                return {
+                  ...state,
+                  allVideoGames: [...filteredDBGames].splice(0,itemPage),
+                  filterGames:filteredDBGames,
+                  filters:true
+                };
+              } else if (action.payload === "API") {
+                const filteredApiGames = gamesApi.filter((game) => {
+                  return !regex.test(game.id);
+                });
+                return {
+                  ...state,
+                  allVideoGames:[...filteredApiGames].splice(0,itemPage),
+                  filterGames:filteredApiGames,
+                  filters:true
+                };
+              }break
+        }
+
 
         default: return state;
             
