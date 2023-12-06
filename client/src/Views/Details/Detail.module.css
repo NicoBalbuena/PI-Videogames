@@ -15,4 +15,17 @@
   background: rgb(219, 211, 182);
   display: flex;
   flex-wrap: wrap;
+  background-color: burlywood;
+}
+
+.button{
+    background-color: rgb(165, 196, 184);
+    border-radius: 1px solid black;
+
+}
+.pContainers{
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+  color: rgb(0, 0, 0);
+  font-size: 20px
 }

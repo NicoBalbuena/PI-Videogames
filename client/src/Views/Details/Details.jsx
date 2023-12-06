@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useEffect} from 'react'
 import { clearDetails, getGamesId } from '../../Redux/Action/action'
 import style from '../Details/Detail.module.css'
+import { Link } from 'react-router-dom/cjs/react-router-dom'
 
 const Details = () => {
   const dispatch=useDispatch()
@@ -25,26 +26,34 @@ const Details = () => {
   return (
     details.imagen ? (
       <div className={style.detailContainer}>
+        <Link to='/home'>
+           <button className={style.button}>Volver atras</button>
+        </Link>
+       
         <div className={style.detailImg}>
           <img src={details.imagen} alt="Imagen videojueg"/>
         </div>
-        <p className='container-elem'>{details.id}</p>
-        <p className='container-elem'>{details.nombre}</p>
-        <p className='container-elem'>{details.plataformas}</p>
-        <p className='container-elem'>{details.fechaDeLanzamiento}</p>
-        <p className='container-elem'>{details.rating}</p>
-        <p className='container-elem'>
-          {details.genero
-            ? details.genero // Si genero existe, úsalo
-            : details.Genres.map(g => g.nombre).join('  ') // Si genero no existe, usa Genres
+        <div className={style.pContainers}>
+          <p>ID: {details.id}</p>
+        <p>Nombre: {details.nombre}</p>
+        <p>PLataformas: {details.plataformas}</p>
+        <p>Fecha de Lanzamiento: {details.fechaDeLanzamiento}</p>
+        <p>Rating: {details.rating}</p>
+        <p>
+          Generos: {details.genero
+            ? details.genero.join(' , ')
+            : details.Genres.map(g => g.nombre).join(' , ') 
           }
         </p>
+        </div>
+        
         <div className={style.detailDescrip}>
-           <p>{details.descripcion}</p>
+           <p>    Descripcion:
+            {details.descripcion}</p>
           </div>
       </div>
     ) : (
-      <div><h1>Cargado...</h1></div>
+      <div><h1>Cargando...</h1></div>
     )
   );
 }

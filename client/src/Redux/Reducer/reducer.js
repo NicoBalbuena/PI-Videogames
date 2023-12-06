@@ -1,5 +1,6 @@
 //importamos las actions-type
 
+import { filterGame } from "../Action/action";
 import { CLEAR_DETAILS, FILTRO, GET_DETAILS, GET_GAMES, GET_GENRES, PAGINACION, SEARCH_GAME } from "../Action/actions-types";
 
 
@@ -13,7 +14,7 @@ let initialState={
     gamesBackUp:[],
     filterGames:[],
     filters:false ,
-    gamesOrd:[]
+    gamesOrd:[],
     
 }
 
@@ -119,7 +120,6 @@ function rootReducer(state=initialState,action){
                             }
                             return 0;
                         }) 
-                        console.log(mayorRai)
                         return{
                             ...state,
                             allVideoGames:[...mayorRai].splice(0,itemPage),
@@ -138,7 +138,6 @@ function rootReducer(state=initialState,action){
                             }
                             return 0;
                         }) 
-                        console.log(menorRai)
                         return{
                             ...state,
                             allVideoGames:[...menorRai].splice(0,itemPage),
@@ -170,6 +169,7 @@ function rootReducer(state=initialState,action){
                 }
                 return false; // Si no hay información de género, exclúyelo del filtro
             });
+            
 
             return {
                 ...state,
@@ -206,6 +206,7 @@ function rootReducer(state=initialState,action){
                 };
               }break
         }
+        
 
 
         default: return state;

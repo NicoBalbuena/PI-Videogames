@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Cards from '../../Components/Cards/Cards'
-import { filterGame, filtro, getGames, getGenero, origenGames, page, resetGames } from '../../Redux/Action/action'
+import { applyFiltros, filterGame, filtro, getGames, getGenero, origenGames, page, resetGames } from '../../Redux/Action/action'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Home.module.css';
 import Footer from '../../Components/Footer/Footer'
@@ -35,7 +35,7 @@ const Home = () => {
   const origenGame=(event)=>{
     dispatch(origenGames(event.target.name))
   }
-  
+
 
   return (
     <div className={styles.homeConteiner}>

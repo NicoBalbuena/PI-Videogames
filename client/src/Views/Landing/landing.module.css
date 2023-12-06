@@ -1,5 +1,6 @@
 
 .container {
+  background-image: url('https://static.vecteezy.com/system/resources/previews/013/782/710/non_2x/video-games-banner-cyber-game-background-vector.jpg');
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,25 +11,18 @@
   border: 1px black;
  
 }
-
 .link-cont {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
 }
-
 button {
   font-size: 1.5em;
 }
-
-.img-cont img {
-  width: 100%;
-  height: auto;
-}
-
-.p-container {
+.pContainer {
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 10px;
   color: blanchedalmond;
+  font-size: 50px
 }

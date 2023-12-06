@@ -171,7 +171,6 @@ const Create = () => {
         <label>Plataformas:</label>
         <input id='plataformas' name="plataformas" type='text'></input>
         <button name="plataformas" onClick={handleChange} type='button'>Agregar</button>
-        {/* Muestra las opciones seleccionadas debajo del campo de entrada */}
         <div>
           <p>Plataformas seleccionadas:</p>
           {state.plataformas.length > 0 && (
@@ -193,7 +192,6 @@ const Create = () => {
             </option>
           ))}
         </select>
-        {/* Muestra las opciones seleccionadas debajo del campo de selección */}
         <div>
           <p>Opciones seleccionadas:</p>
           {state.genero !== "Elegir un genero" && (

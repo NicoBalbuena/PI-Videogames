@@ -1,20 +1,20 @@
 import axios from "axios";
-import { CLEAR_DETAILS, FILTRO, FILTRO_GAME, FILTRO_ORIGEN, GET_DETAILS, GET_GAMES, GET_GENRES, PAGINACION, RESET, SEARCH_GAME } from "./actions-types";
+import { CLEAR_DETAILS, FILTRO, FILTRO_GAME, FILTRO_ORIGEN, FILTRO_TODOS, GET_DETAILS, GET_GAMES, GET_GENRES, PAGINACION, RESET, SEARCH_GAME } from "./actions-types";
 
 
 export function postGame(state){
     return async function(){
             try {
             await axios.post("http://localhost:3001/postgame/",state)
-            console.log("Videogame creado")
+            alert("Videogame creado")
         } catch (error) {
-            console.log(error.response.data.error)
+            alert("Hubo un problema al crear el video game: ",error.response.data.error)
         }
     }
 }
 
 
-export function getGenero(state){
+export function getGenero(){
     return async function(dispatch){
         try {
             const response=await axios.get("http://localhost:3001/genres")
@@ -22,10 +22,8 @@ export function getGenero(state){
                 type:GET_GENRES,
                 payload:response.data
             })
-           
-            
         } catch (error) {
-            console.log(error.response.data.error)
+            alert(error.response.data.error)
         }
     }
 }
@@ -159,6 +157,7 @@ export function origenGames(order){
         }
     }
 }
+
 
 
 

@@ -9,3 +9,5 @@ export const RESET="RESET"
 export const FILTRO_GAME="FILTRO_GAME"
 export const FILTRO_ORIGEN="FILTRO_ORIGEN"
 
+
+

@@ -6,16 +6,13 @@ import style from '../Landing/landing.module.css'
 
 const Landing = () => {
   return (
-    <div className='container'>
+    <div className={style.container}>
         <div className='link-cont' >
           <Link to={"/home"}>
             <button>Start</button>
           </Link>
         </div>
-        <div className='img-cont'>
-          <img src={play} alt="" />
-        </div>
-        <div className='p-container'>
+        <div className={style.pContainer}>
           <p>Bienvenidos a un mundo de juegos!</p>
         </div>
 </div>
