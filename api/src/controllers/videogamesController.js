@@ -4,25 +4,37 @@ const axios=require("axios");
 
 
 
-const getVideogames=async()=>{
-    const response=await axios.get(`https://api.rawg.io/api/games?key=${key}`)
-    const data=response.data.results
-    const results= data.map((games)=>{
+const getVideogames = async () => {
+    const pageSize = 100;
+    const totalPages = 5; // Número total de páginas que deseas obtener
+    const results = [];
+  
+    // Itera sobre las páginas y realiza llamadas a la API
+    for (let page = 1; page <= totalPages; page++) {
+      const response = await axios.get(`https://api.rawg.io/api/games?key=${key}&page=${page}&page_size=${pageSize}`);
+      const data = response.data.results;
+  
+      
+      // Mapea y agrega los juegos a la lista de resultados
+      data.forEach((games) => {
         const platforms = games.platforms.map((p) => p.platform.name);
-        const genresUniq=games.genres.map((g)=>g.name)
-        return{
-            id:games.id,
-            nombre:games.name,
-            descripcion:games.description,
-            plataformas:platforms,
-            fechaDeLanzamiento:games.released,
-            rating:games.rating,
-            imagen:games.background_image,
-            genres:genresUniq
-        }
-    })
+        const genresUniq = games.genres.map((g) => g.name);
+  
+        results.push({
+          id: games.id,
+          nombre: games.name,
+          descripcion: games.description,
+          plataformas: platforms,
+          fechaDeLanzamiento: games.released,
+          rating: games.rating,
+          imagen: games.background_image,
+          genres: genresUniq,
+        });
+      });
+    }
+  
     return results;
-}
+  };
 
 const getVideogamesDB=async()=>{
     const gamesDB=await Videogames.findAll({

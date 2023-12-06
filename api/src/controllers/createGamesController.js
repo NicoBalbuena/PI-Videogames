@@ -4,7 +4,6 @@ const createGame=async(nombre,descripcion,plataformas,fechaDeLanzamiento,rating,
     genres
    
     )=> {
-        console.log(genres)  
     const newGame=await Videogames.create({
         nombre,
         descripcion,

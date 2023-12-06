@@ -10,15 +10,20 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter> 
-      <Switch>
-        <Route exact path={"/"} component={Landing}></Route>
+      <div>
+        <Switch>
+        <Route exact path={"/landing"} component={Landing}></Route>
         <Route path={"/"} component={Navbar}></Route>
       </Switch>
-      <Switch>
+      </div>
+      <div>
+        <Switch>
           <Route path={"/details/:id"} component={Details}></Route>
           <Route path={"/home"} component={Home}></Route>
           <Route path={"/create"} component={Create}></Route>
       </Switch>
+      </div>
+      
       </BrowserRouter>
     </div>
   );

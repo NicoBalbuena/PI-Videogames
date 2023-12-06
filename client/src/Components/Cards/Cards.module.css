@@ -1,0 +1,9 @@
+
+.cardsContantai {
+    
+    width: 70vw; 
+    margin-bottom: 20px; 
+    display: flex;
+    flex-wrap: wrap;
+
+  }

@@ -3,13 +3,18 @@ import SearchBar from '../SearchBar/SearchBar'
 import Home from '../../Views/Home/Home'
 import Create from '../../Views/Create/Create'
 import { Link } from 'react-router-dom/cjs/react-router-dom'
+import '../Navbar/Navbar.module.css'
+import style  from './Navbar.module.css'
+
 
 const Navbar = () => {
   return (
-    <div>
-      <Link to='/home'>Home</Link>
-      <Link to='/create'>Registrar un video game</Link>
-      
+    
+    <div className={style.mainContainer}>
+      <div className='links-cont'>
+        <Link to='/home'>Home</Link>
+        <div><Link to='/create'>Registra tu video game</Link></div>
+      </div>
       <SearchBar></SearchBar>
       
     </div>

@@ -1,0 +1,18 @@
+.detailImg img{
+    max-width: 40%;
+  height: auto;
+  border-radius: 8px;
+  border-top: 10px;
+}
+
+.detailCointeiner {
+    border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 150px ;
+  background: rgb(219, 211, 182);
+  display: flex;
+  flex-wrap: wrap;
+}

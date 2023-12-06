@@ -82,11 +82,10 @@ function rootReducer(state=initialState,action){
             };
         case FILTRO:
             switch (action.payload) {
-                
                 case "AZ":
                     let ascendente = [...state.gamesBackUp].sort((prev,next)=>{
-                        if(prev.nombre>next.nombre)return 1
-                        if(prev.nombre<next.nombre)return -1
+                        if(prev.nombre.toLowerCase()>next.nombre.toLowerCase())return 1
+                        if(prev.nombre.toLowerCase()<next.nombre.toLowerCase())return -1
                         return 0
                     })
                     return{
@@ -99,8 +98,8 @@ function rootReducer(state=initialState,action){
                     }
                 case "ZA":
                     let descendente = [...state.gamesBackUp].sort((prev,next)=>{
-                        if(next.nombre>prev.nombre)return 1
-                        if(next.nombre<prev.nombre)return -1
+                        if(next.nombre.toLowerCase()>prev.nombre.toLowerCase())return 1
+                        if(next.nombre.toLowerCase()<prev.nombre.toLowerCase())return -1
                         return 0
                     })
                     return{
@@ -111,25 +110,35 @@ function rootReducer(state=initialState,action){
                        
                     }
                     case "MayorRai":
-                        let mayorRai = [...state.gamesBackUp].sort((prev,next)=>{
-                            if(prev.rating>next.rating)return 1
-                            if(prev.rating<next.rating)return -1
-                            return 0
-                        })
+                        let mayorRai = [...state.gamesBackUp].sort(function (a,b) {
+                            if(a.rating > b.rating) {
+                                return -1;
+                            }
+                            if(b.rating > a.rating) {
+                                return 1;
+                            }
+                            return 0;
+                        }) 
+                        console.log(mayorRai)
                         return{
                             ...state,
                             allVideoGames:[...mayorRai].splice(0,itemPage),
-                            gamesBackUp:mayorRai,
+                            
                             currentPage:0
                             
                            
                         }
                     case "MenorRai":
-                        let menorRai = [...state.gamesBackUp].sort((prev,next)=>{
-                            if(next.rating>prev.rating)return 1
-                            if(next.rating<prev.rating)return -1
-                            return 0
-                        })
+                        let menorRai = [...state.gamesBackUp].sort(function (a,b) {
+                            if(a.rating > b.rating) {
+                                return 1;
+                            }
+                            if(b.rating > a.rating) {
+                                return -1;
+                            }
+                            return 0;
+                        }) 
+                        console.log(menorRai)
                         return{
                             ...state,
                             allVideoGames:[...menorRai].splice(0,itemPage),
@@ -152,22 +161,22 @@ function rootReducer(state=initialState,action){
                     
                 };
         case "FILTRO_GAME":
-                    let filterByGenres = [...state.gamesBackUp].filter((g) => {
-                        if (g.genres) {
-                            return g.genres.includes(action.payload);
-                        } else if (g.Genres && g.Genres.length > 0) {
-                            // Asegúrate de que Genres sea un array, y luego verifica la inclusión
-                            return g.Genres.map(genre => genre.nombre).includes(action.payload);
-                        }
-                        return false; // Si no hay información de género, exclúyelo del filtro
-                    });
-                
-                    return {
-                        ...state,
-                        allVideoGames: [...filterByGenres].splice(0, itemPage),
-                        filterGames: filterByGenres,
-                        filters: true
-                    };
+            let filterByGenres = [...state.gamesBackUp].filter((g) => {
+                if (g.genres) {
+                    return g.genres.includes(action.payload);
+                } else if (g.Genres && g.Genres.length > 0) {
+                    // Asegúrate de que Genres sea un array, y luego verifica la inclusión
+                    return g.Genres.map(genre => genre.nombre).includes(action.payload);
+                }
+                return false; // Si no hay información de género, exclúyelo del filtro
+            });
+
+            return {
+                ...state,
+                allVideoGames: [...filterByGenres].splice(0, itemPage),
+                filterGames: filterByGenres,
+                filters: true
+            };
 
         case "FILTRO_ORIGEN":{
             const regex = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/;
