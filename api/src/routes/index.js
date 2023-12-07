@@ -6,6 +6,7 @@ const videogamesRouter = require('./videogamesRouter');
 const genresRouter = require('./genresRouter');
 const createRouter = require('./createRouter');
 
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -16,6 +17,7 @@ router.use('/videogames/name',nameRouter)
 router.use('/videogames',videogamesRouter)
 router.use('/genres',genresRouter)
 router.use('/postgame',createRouter)
+
 
 
 module.exports = router;

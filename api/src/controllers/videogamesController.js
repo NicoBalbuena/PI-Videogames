@@ -6,16 +6,13 @@ const axios=require("axios");
 
 const getVideogames = async () => {
     const pageSize = 100;
-    const totalPages = 5; // Número total de páginas que deseas obtener
+    const totalPages = 5; 
     const results = [];
-  
-    // Itera sobre las páginas y realiza llamadas a la API
+
     for (let page = 1; page <= totalPages; page++) {
       const response = await axios.get(`https://api.rawg.io/api/games?key=${key}&page=${page}&page_size=${pageSize}`);
       const data = response.data.results;
-  
-      
-      // Mapea y agrega los juegos a la lista de resultados
+ 
       data.forEach((games) => {
         const platforms = games.platforms.map((p) => p.platform.name);
         const genresUniq = games.genres.map((g) => g.name);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
-import styles from './Cards.module.css';  // Asegúrate de importar los estilos correctamente
+import styles from './Cards.module.css';  
 
 const Cards = () => {
   const allVideoGames = useSelector(state => state.allVideoGames);

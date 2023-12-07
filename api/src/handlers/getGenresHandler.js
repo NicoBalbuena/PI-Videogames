@@ -1,5 +1,5 @@
 const {getAllGenresDB}=require("../controllers/genController");
-const { getAllVideogames } = require("../controllers/videogamesController");
+
 
 const getGenresHandler=async(req,res)=>{
     const {nombre,descripcion,plataformas,fechaDeLanzamiento,rating,imagen,

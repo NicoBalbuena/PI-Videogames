@@ -18,8 +18,6 @@ let initialState={
     
 }
 
-
-//def del rootreducer
 function rootReducer(state=initialState,action){
     const itemPage=15
     
@@ -164,10 +162,9 @@ function rootReducer(state=initialState,action){
                 if (g.genres) {
                     return g.genres.includes(action.payload);
                 } else if (g.Genres && g.Genres.length > 0) {
-                    // Asegúrate de que Genres sea un array, y luego verifica la inclusión
                     return g.Genres.map(genre => genre.nombre).includes(action.payload);
                 }
-                return false; // Si no hay información de género, exclúyelo del filtro
+                return false; 
             });
             
 
@@ -206,9 +203,18 @@ function rootReducer(state=initialState,action){
                 };
               }break
         }
-        
-
-
+        case "FILTRO_RATING":
+                console.log(action.payload)
+                let topRai = [...state.gamesBackUp].filter((g)=>g.rating_top>3)
+                console.log(topRai)
+                return{
+                    ...state,
+                    allVideoGames:[...state.gamesBackUp].splice(0,itemPage),
+                    gamesBackUp:topRai,
+                    currentPage:0
+                    
+                   
+                }
         default: return state;
             
     }

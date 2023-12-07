@@ -9,12 +9,12 @@
 
 .botonCont {
     display: flex;
-    flex-wrap: wrap; /* Hace que los elementos se envuelvan en varias líneas si no caben en una sola fila */
-    gap: 10px; /* Ajusta el espacio entre los elementos */
+    flex-wrap: wrap; 
+    gap: 10px;
 }
 
 .botonCont > div {
-    margin: 10px; /* Ajusta el espacio alrededor de cada grupo de botones */
+    margin: 10px; 
 }
 
 button {

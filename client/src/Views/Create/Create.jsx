@@ -142,10 +142,10 @@ const Create = () => {
   const disableFunction = () => {
     for (const error in errors) {
       if (errors[error] !== "") {
-        return true; // Si encuentra un error, deshabilita el botón
+        return true; 
       }
     }
-    return false; // No se encontraron errores, habilita el botón
+    return false;
   };
   
 

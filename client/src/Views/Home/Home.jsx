@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Cards from '../../Components/Cards/Cards'
-import { applyFiltros, filterGame, filtro, getGames, getGenero, origenGames, page, resetGames } from '../../Redux/Action/action'
+import { applyFiltros, filterGame, filtro, getGames, getGenero, getRating, origenGames, page, resetGames } from '../../Redux/Action/action'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Home.module.css';
 import Footer from '../../Components/Footer/Footer'
@@ -36,6 +36,10 @@ const Home = () => {
     dispatch(origenGames(event.target.name))
   }
 
+  const rating=(event)=>{
+    dispatch(getRating(event.target.name))
+  }
+
 
   return (
     <div className={styles.homeConteiner}>
@@ -49,9 +53,11 @@ const Home = () => {
                 <button name="ZA" onClick={filtros}>ZA</button>
                 <button name="MayorRai" onClick={filtros}>Mayor Raiting</button>
                 <button name="MenorRai" onClick={filtros}>Menor Raiting</button>
+                <button name="rating"onClick={rating}>Top rating</button>
             </div>
             <div>
                 <label>Filtros</label>
+                <button onClick={rating}>Top rating</button>
                 <select onChange={filterGames} name="genres" id="">
                     <option value="">Selecciona tu genero</option>
                     {allGenres.map(genres => (

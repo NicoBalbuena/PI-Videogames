@@ -17,7 +17,6 @@
   border-radius: 8px;
 }
 
-/* Agrega estilos para el enlace dentro de la tarjeta si es necesario */
 .cardContainer a {
   text-decoration: none; 
   color: inherit;

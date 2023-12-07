@@ -10,7 +10,6 @@ const getVideogamesHandler=async(req,res)=>{
     }
     
     if(id){
-        console.log("Entro en el handler",id)
         const response=await allVideogamesId(id);
         console.log(allVideogamesId)
         return res.status(200).json(response);

@@ -13,9 +13,12 @@ const Navbar = () => {
     <div className={style.mainContainer}>
       <div className='links-cont'>
         <Link to='/home'>Home</Link>
-        <div><Link to='/create'>Registra tu video game</Link></div>
+        <div><Link to='/create'>Crea tu propio video game!</Link></div>
       </div>
-      <SearchBar></SearchBar>
+      <div>
+        <SearchBar></SearchBar>
+      </div>
+      
       
     </div>
   )

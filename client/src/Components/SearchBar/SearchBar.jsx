@@ -22,7 +22,7 @@ const SearchBar = () => {
         <form onSubmit={handleSubmit}>
             
             <input onChange={handleChange} type="text" />
-            <input type="submit" />
+            <input type="submit" /><p>Busca aqui tu juego preferido!</p>
         </form>
     </div>
   )
